@@ -1,0 +1,16 @@
+const fs = require("fs");
+
+async function writeJsonFile(jsonObject, path = "utils/matches.json") {
+  const updatedJsonString = JSON.stringify(jsonObject, null, 2);
+  await fs.promises.writeFile(path, updatedJsonString, "utf-8");
+}
+
+async function readJsonFile(path = "utils/matches.json") {
+  const fileContent = await fs.promises.readFile(path, "utf-8");
+  if (fileContent) {
+    const jsonObject = JSON.parse(fileContent);
+    return jsonObject;
+  }
+}
+
+module.exports = { writeJsonFile, readJsonFile };
